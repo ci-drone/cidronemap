@@ -60,7 +60,7 @@ class NewTaskPanel extends React.Component {
 
   cancel = (e) => {
     if (this.props.onCancel){
-      if (window.confirm("Are you sure you want to cancel?")){
+      if (window.confirm("Etes vous sure de l'annuler?")){
         this.props.onCancel();
       }
     }
@@ -69,7 +69,7 @@ class NewTaskPanel extends React.Component {
   getTaskInfo(){
     return Object.assign(this.taskForm.getTaskInfo(), {
       resizeSize: this.state.resizeSize,
-      resizeMode: this.state.resizeMode 
+      resizeMode: this.state.resizeMode
     });
   }
 
@@ -88,7 +88,7 @@ class NewTaskPanel extends React.Component {
     let n = parseInt(e.target.value.replace(/[^\d]*/g, ""));
     if (isNaN(n)) n = "";
     this.setState({resizeSize: n});
-    
+
     setTimeout(() => {
         this.handleFormChanged();
     }, 0);
@@ -106,7 +106,7 @@ class NewTaskPanel extends React.Component {
     return (
       <div className="new-task-panel theme-background-highlight">
         <div className="form-horizontal">
-          <p>{this.props.filesCount} files selected. Please check these additional options:</p>
+          <p>{this.props.filesCount} fichier selectionner. Veuilez verifier les options:</p>
           <EditTaskForm
             onFormLoaded={this.handleFormTaskLoaded}
             onFormChanged={this.handleFormChanged}
@@ -116,7 +116,7 @@ class NewTaskPanel extends React.Component {
           {this.state.editTaskFormLoaded ?
             <div>
               <div className="form-group">
-                <label className="col-sm-2 control-label">Resize Images</label>
+                <label className="col-sm-2 control-label">Redimensionnement</label>
                 <div className="col-sm-10">
                     <div className="btn-group">
                     <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -125,7 +125,7 @@ class NewTaskPanel extends React.Component {
                     <ul className="dropdown-menu">
                         {ResizeModes.all().map(mode =>
                         <li key={mode}>
-                            <a href="javascript:void(0);" 
+                            <a href="javascript:void(0);"
                                 onClick={this.setResizeMode(mode)}>
                                 <i style={{opacity: this.state.resizeMode === mode ? 1 : 0}} className="fa fa-check"></i> {ResizeModes.toHuman(mode)}</a>
                         </li>
@@ -133,12 +133,12 @@ class NewTaskPanel extends React.Component {
                     </ul>
                     </div>
                     <div className={"resize-control " + (this.state.resizeMode === ResizeModes.NO ? "hide" : "")}>
-                    <input 
-                        type="number" 
+                    <input
+                        type="number"
                         step="100"
                         className="form-control"
-                        onChange={this.handleResizeSizeChange} 
-                        value={this.state.resizeSize} 
+                        onChange={this.handleResizeSizeChange}
+                        value={this.state.resizeSize}
                     />
                     <span>px</span>
                     </div>
@@ -153,11 +153,11 @@ class NewTaskPanel extends React.Component {
             </div>
           : ""}
 
-          {this.state.editTaskFormLoaded ? 
+          {this.state.editTaskFormLoaded ?
             <div className="form-group">
               <div className="col-sm-offset-2 col-sm-10 text-right">
-                {this.props.onCancel !== undefined && <button type="submit" className="btn btn-danger" onClick={this.cancel} style={{marginRight: 4}}><i className="glyphicon glyphicon-remove-circle"></i> Cancel</button>}
-                <button type="submit" className="btn btn-primary" onClick={this.save} disabled={this.props.filesCount <= 1}><i className="glyphicon glyphicon-saved"></i> Start Processing</button>
+                {this.props.onCancel !== undefined && <button type="submit" className="btn btn-danger" onClick={this.cancel} style={{marginRight: 4}}><i className="glyphicon glyphicon-remove-circle"></i>Annuler</button>}
+                <button type="submit" className="btn btn-primary" onClick={this.save} disabled={this.props.filesCount <= 1}><i className="glyphicon glyphicon-saved"></i> Demarrez le traitement</button>
               </div>
             </div>
             : ""}

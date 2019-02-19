@@ -1,7 +1,7 @@
 const dict = [
-  {k: 'NO', v: 0, human: "No"}, // Don't resize
-  {k: 'YES', v: 1, human: "Yes"}, // Resize on server
-  {k: 'YESINBROWSER', v: 2, human: "Yes (In browser)"} // Resize on browser
+  {k: 'NO', v: 0, human: "Non"}, // Don't resize
+  {k: 'YES', v: 1, human: "Oui"}, // Resize on server
+  {k: 'YESINBROWSER', v: 2, human: "Oui (Dans le navigateur)"} // Resize on browser
 ];
 
 const exp = {
@@ -15,7 +15,7 @@ const exp = {
     for (let i in dict){
       if (dict[i].v === v) return dict[i].human;
     }
-    throw new Error("Invalid value: " + v);
+    throw new Error("Valeur invalide: " + v);
   }
 };
 dict.forEach(en => {
@@ -23,4 +23,3 @@ dict.forEach(en => {
 });
 
 export default exp;
-

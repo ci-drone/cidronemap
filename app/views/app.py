@@ -46,7 +46,7 @@ def map(request, project_pk=None, task_pk=None):
         project = get_object_or_404(Project, pk=project_pk)
         if not request.user.has_perm('app.view_project', project):
             raise Http404()
-        
+
         if task_pk is not None:
             task = get_object_or_404(Task.objects.defer('orthophoto_extent', 'dsm_extent', 'dtm_extent'), pk=task_pk, project=project)
             title = task.name
@@ -95,9 +95,9 @@ def processing_node(request, processing_node_id):
     if not pn.update_node_info():
         messages.add_message(request, messages.constants.WARNING, '{} seems to be offline.'.format(pn))
 
-    return render(request, 'app/processing_node.html', 
+    return render(request, 'app/processing_node.html',
             {
-                'title': 'Processing Node', 
+                'title': 'Processing Node',
                 'processing_node': pn,
                 'available_options_json': pn.get_available_options_json(pretty=True)
             })

@@ -6,11 +6,11 @@ import $ from 'jquery';
 
 class FormDialog extends React.Component {
     static defaultProps = {
-        title: "Title",
-        saveLabel: "Save",
-        savingLabel: "Saving...",
+        title: "Titre",
+        saveLabel: "Enregistrer",
+        savingLabel: "Sauvegarde en cours...",
         saveIcon: "glyphicon glyphicon-plus",
-        deleteWarning: "Are you sure?",
+        deleteWarning: "Etes vous sure?",
         show: false
     };
 
@@ -119,7 +119,7 @@ class FormDialog extends React.Component {
                 this.setState({deleting: true});
                 this.props.deleteAction()
                     .fail(e => {
-                        if (this._mounted) this.setState({error: e.message || (e.responseJSON || {}).detail || e.responseText || "Could not delete item"});
+                        if (this._mounted) this.setState({error: e.message || (e.responseJSON || {}).detail || e.responseText || "Impossible de supprimer"});
                     }).always(() => {
                         if (this._mounted) this.setState({deleting: false});
                     });
@@ -147,9 +147,9 @@ class FormDialog extends React.Component {
                   </div>
                   <div className="modal-footer">
                     <div className="pull-right">
-                        <button type="button" className="btn btn-default" onClick={this.hide} disabled={this.state.saving}>Cancel</button>
+                        <button type="button" className="btn btn-default" onClick={this.hide} disabled={this.state.saving}>Annuler</button>
                         <button type="button" className="btn btn-primary save" onClick={this.handleSave} disabled={this.state.saving}>
-                            {this.state.saving ? 
+                            {this.state.saving ?
                                 <span>
                                     <i className="fa fa-circle-o-notch fa-spin"></i> {this.props.savingLabel}
                                 </span>
@@ -160,16 +160,16 @@ class FormDialog extends React.Component {
                     </div>
                     {this.props.deleteAction ?
                         <div className="text-left">
-                            <button 
+                            <button
                                 disabled={this.state.deleting}
-                                className="btn btn-danger" 
+                                className="btn btn-danger"
                                 onClick={this.handleDelete}>
-                                {this.state.deleting ? 
+                                {this.state.deleting ?
                                     <span>
-                                        <i className="fa fa-circle-o-notch fa-spin"></i> Deleting...
+                                        <i className="fa fa-circle-o-notch fa-spin"></i> Suppression...
                                     </span>
                                 :   <span>
-                                        <i className="glyphicon glyphicon-trash"></i> Delete
+                                        <i className="glyphicon glyphicon-trash"></i> Supprimer
                                     </span>}
                             </button>
                         </div>

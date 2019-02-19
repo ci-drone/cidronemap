@@ -52,8 +52,8 @@ class EditTaskPanel extends React.Component {
           this.setState({saving: false});
           this.props.onSave(json);
         }).fail(() => {
-          this.setState({saving: false, error: "Could not update task information. Plese try again."});
-        });     
+          this.setState({saving: false, error: "Impossible de mettre a jour. Veuillez ressayer."});
+        });
     }
 
     handleCancel(){
@@ -65,20 +65,20 @@ class EditTaskPanel extends React.Component {
             <div className="edit-task-panel">
               <ErrorMessage bind={[this, "error"]} />
               <div className="form-horizontal">
-                <EditTaskForm 
+                <EditTaskForm
                   ref={(domNode) => { if (domNode) this.taskForm = domNode; }}
                   onFormLoaded={this.handleFormTaskLoaded}
                   task={this.props.task}
                 />
                 <div className="actions">
-                    <button type="button" className="btn btn-sm btn-default" onClick={this.handleCancel} disabled={this.state.saving}>Cancel</button>
+                    <button type="button" className="btn btn-sm btn-default" onClick={this.handleCancel} disabled={this.state.saving}>Annuler</button>
                     <button type="button" className="btn btn-sm btn-primary save" onClick={this.handleSave} disabled={this.state.saving || !this.state.editTaskFormLoaded}>
-                        {this.state.saving ? 
+                        {this.state.saving ?
                             <span>
-                                <i className="fa fa-circle-o-notch fa-spin"></i> Saving...
+                                <i className="fa fa-circle-o-notch fa-spin"></i> Sauvegarde en cours...
                             </span>
                         :   <span>
-                                <i className="fa fa-edit"></i> Save
+                                <i className="fa fa-edit"></i> Enregistrer
                             </span>}
                     </button>
                 </div>

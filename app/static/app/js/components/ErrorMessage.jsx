@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 class ErrorMessage extends React.Component {
     static propTypes = {
-        bind: PropTypes.array.isRequired // two element array, 
-                                               // with first element being the parent element 
+        bind: PropTypes.array.isRequired // two element array,
+                                               // with first element being the parent element
                                                // and the second the error property to display
                                                // ex. [this, 'error']
     };
@@ -25,7 +25,7 @@ class ErrorMessage extends React.Component {
         if (parent.state[prop]){
             return (
                 <div className={"alert alert-warning alert-dismissible " + (this.props.className ? this.props.className : "")}>
-                    <button type="button" className="close" aria-label="Close" onClick={this.close}><span aria-hidden="true">&times;</span></button>
+                    <button type="button" className="close" aria-label="Fermer" onClick={this.close}><span aria-hidden="true">&times;</span></button>
                     {parent.state[prop]}
                 </div>
             );

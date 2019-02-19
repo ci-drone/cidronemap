@@ -1,5 +1,5 @@
 {
-	"name": "Lightning Network Bridge",
+	"name": "Service Lightning Bridge",
 	"webodmMinVersion": "0.7.1",
 	"description": "A plugin to sync accounts from webodm.net",
 	"version": "0.1.0",

@@ -56,7 +56,7 @@ class SharePopup extends React.Component{
         this.setState({task});
         this.props.taskChanged(task);
       })
-      .fail(() => this.setState({error: "An error occurred. Check your connection and permissions."}))
+      .fail(() => this.setState({error: "Erreur Inconnue. Verifier votre connexion ou permission."}))
       .always(() => {
         this.setState({togglingShare: false});
       });
@@ -78,8 +78,8 @@ class SharePopup extends React.Component{
         <div className="popover-content theme-secondary">
           <ErrorMessage bind={[this, 'error']} />
           <div className="checkbox">
-            <button type="button" 
-                className={"btn btn-qrcode btn-sm " + 
+            <button type="button"
+                className={"btn btn-qrcode btn-sm " +
                   (this.state.showQR ? "btn-primary " : "btn-default ") +
                   (!this.state.task.public ? "hide" : "")}
                 onClick={this.toggleQRCode}>
@@ -87,13 +87,13 @@ class SharePopup extends React.Component{
             </button>
 
             <label onClick={this.handleEnableSharing}>
-              {this.state.togglingShare ? 
+              {this.state.togglingShare ?
                 <i className="fa fa-refresh fa-spin fa-fw"></i>
               : ""}
 
-              <input 
+              <input
                 className={this.state.togglingShare ? "hide" : ""}
-                type="checkbox" 
+                type="checkbox"
                 checked={this.state.task.public}
                 onChange={() => {}}
                  /> Enabled
@@ -103,22 +103,22 @@ class SharePopup extends React.Component{
             <div className={"form-group " + (this.state.showQR ? "hide" : "")}>
               <label>
                 Link:
-                <ClipboardInput 
-                  type="text" 
-                  className="form-control" 
-                  value={shareLink} 
-                  readOnly={true} 
+                <ClipboardInput
+                  type="text"
+                  className="form-control"
+                  value={shareLink}
+                  readOnly={true}
                   />
               </label>
             </div>
             <div className={"form-group " + (this.state.showQR ? "hide" : "")}>
               <label>
                 HTML iframe:
-                <ClipboardInput 
-                  type="text" 
-                  className="form-control" 
-                  value={iframeCode} 
-                  readOnly={true} 
+                <ClipboardInput
+                  type="text"
+                  className="form-control"
+                  value={iframeCode}
+                  readOnly={true}
                   />
               </label>
             </div>
@@ -135,7 +135,7 @@ class SharePopup extends React.Component{
         </div>
       </div>
     </div>);
-  }       
+  }
 }
 
 export default SharePopup;

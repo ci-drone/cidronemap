@@ -8,7 +8,7 @@
 
 <table class="table table-bordered table-striped table-first-col-bold processing-node-info">
 	<tr>
-		<td>{% trans "Hostname" %}</td>
+		<td>{% trans "Nom d'hote" %}</td>
 		<td>{{ processing_node.hostname }}</td>
 	</tr>
 	<tr>
@@ -16,38 +16,38 @@
 		<td>{{ processing_node.port }}</td>
 	</tr>
 	<tr>
-		<td>{% trans "API Version" %}</td>
-		<td>{{ processing_node.api_version }}</td>
+		<td>{% trans "Version API" %}</td>
+		<td>{{ processing_node.api_version|default:"Inconnue"  }}</td>
 	</tr>
 	<tr>
-		<td>{% trans "ODM Version" %}</td>
-		<td>{{ processing_node.odm_version }}</td>
+		<td>{% trans "Version ODM" %}</td>
+		<td>{{ processing_node.odm_version|default:"Inconnue" }}</td>
 	</tr>
 	<tr>
-		<td>{% trans "Queue Count" %}</td>
+		<td>{% trans "Nombre de Fil d'Attente" %}</td>
 		<td>{{ processing_node.queue_count }}</td>
 	</tr>
 	<tr>
-		<td>{% trans "Max Images Limit" %}</td>
-		<td>{{ processing_node.max_images }}</td>
+		<td>{% trans "Limitte Image Max" %}</td>
+		<td>{{ processing_node.max_images|default:"Aucun" }}</td>
 	</tr>
 	<tr>
 		<td>{% trans "Label" %}</td>
-		<td>{{ processing_node.label|default:"None" }}</td>
+		<td>{{ processing_node.label|default:"Aucun" }}</td>
 	</tr>
 	<tr>
-		<td>{% trans "Last Refreshed" %}</td>
-		<td>{{ processing_node.last_refreshed|timesince }} {% trans 'ago' %} ({{ processing_node.last_refreshed|localtime }})</td> <!-- TODO: timezone? -->
+		<td>{% trans "Derniere mise a jour" %}</td>
+		<td>{{ processing_node.last_refreshed|timesince }} {% trans 'depuis' %} ({{ processing_node.last_refreshed|localtime }})</td> <!-- TODO: timezone? -->
 	</tr>
 	<tr>
 		<td>{% trans "Options (JSON)" %}</td>
 		<td><div data-console data-console-lang="js" data-console-height="300">{{ available_options_json}}</div></td>
 	</tr>
 </table>
-{% if user.is_superuser %} 
+{% if user.is_superuser %}
 <div class="text-center">
-	<button class="btn btn-default" onclick="location.href='{% url "admin:nodeodm_processingnode_change" processing_node.id %}';"><i class="glyphicon glyphicon-pencil"></i> {% trans "Edit" %}</button>
-	<button class="btn btn-danger" onclick="location.href='{% url "admin:nodeodm_processingnode_delete" processing_node.id  %}';"><i class="glyphicon glyphicon-trash"></i> {% trans "Delete" %}</button>
+	<button class="btn btn-default" onclick="location.href='{% url "admin:nodeodm_processingnode_change" processing_node.id %}';"><i class="glyphicon glyphicon-pencil"></i> {% trans "Modifier" %}</button>
+	<button class="btn btn-danger" onclick="location.href='{% url "admin:nodeodm_processingnode_delete" processing_node.id  %}';"><i class="glyphicon glyphicon-trash"></i> {% trans "Supprimer" %}</button>
 </div>
 {% endif %}
 

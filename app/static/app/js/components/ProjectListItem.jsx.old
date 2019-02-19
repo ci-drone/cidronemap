@@ -1,5 +1,5 @@
-import React from 'react';
 import '../css/ProjectListItem.scss';
+import React from 'react';
 import update from 'immutability-helper';
 import TaskList from './TaskList';
 import NewTaskPanel from './NewTaskPanel';
@@ -340,7 +340,6 @@ class ProjectListItem extends React.Component {
     const numTasks = data.tasks.length;
 
     return (
-      <div className="card">
       <li className={"project-list-item list-group-item " + (refreshing ? "Actualisation" : "")}
          href="javascript:void(0);"
          ref={this.setRef("dropzone")}
@@ -361,32 +360,6 @@ class ProjectListItem extends React.Component {
         <div className="row no-margin">
           <ErrorMessage bind={[this, 'error']} />
           <div className="btn-group pull-right">
-            <div className="project-name">
-            {data.name}
-
-            <div className="row project-links">
-              {numTasks > 0 ?
-                <span>
-                  <i className='fa fa-tasks'>
-                  </i> <a href="javascript:void(0);" onClick={this.toggleTaskList}>
-                    {numTasks} Tasks <i className={'fa fa-caret-' + (this.state.showTaskList ? 'down' : 'right')}></i>
-                  </a>
-                </span>
-                : ""}
-
-              <div className="modif">
-                <i className='fa fa-edit'></i>
-                <a href="javascript:void(0);" onClick={this.handleEditProject}> Modifier </a>
-              </div>
-            </div>
-
-
-          </div>
-
-          <div className="project-description">
-            {data.description}
-          </div>
-
             {this.hasPermission("add") ?
               <button type="button"
                       className={"btn btn-primary btn-sm " + (this.state.upload.uploading ? "hide" : "")}
@@ -410,9 +383,26 @@ class ProjectListItem extends React.Component {
             </button>
           </div>
 
-          
-          
+          <span className="project-name">
+            {data.name}
+          </span>
+          <div className="project-description">
+            {data.description}
+          </div>
+          <div className="row project-links">
+            {numTasks > 0 ?
+              <span>
+                <i className='fa fa-tasks'>
+                </i> <a href="javascript:void(0);" onClick={this.toggleTaskList}>
+                  {numTasks} Tasks <i className={'fa fa-caret-' + (this.state.showTaskList ? 'down' : 'right')}></i>
+                </a>
+              </span>
+              : ""}
 
+            <i className='fa fa-edit'>
+            </i> <a href="javascript:void(0);" onClick={this.handleEditProject}> Modifier
+            </a>
+          </div>
         </div>
         <i className="drag-drop-icon fa fa-inbox"></i>
         <div className="row">
@@ -456,7 +446,6 @@ class ProjectListItem extends React.Component {
 
         </div>
       </li>
-      </div>
     );
   }
 }
