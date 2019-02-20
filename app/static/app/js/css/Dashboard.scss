@@ -1,5 +1,4 @@
 #dashboard-app{
-
    
     .row{
         &.no-margin{
@@ -22,6 +21,7 @@
     }
 
     .add-button, .list-group{
+        margin-top: 10px;
         margin-bottom: 8px;
         margin-right: 8px;
     }

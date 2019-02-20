@@ -71,29 +71,6 @@
                     <!-- /.nav-second-level -->
                 </li>
                 {% endif %}
-
-                <!-- MIS EN COMMENTAIRE PERSONNELEMENT {% if user.is_staff %}
-                <li>
-                    <a href="/admin/"><i class="fa fa-gears fa-fw"></i> {% trans 'Administration' %}</a>
-                </li>
-                {% endif %}
-                <li>
-                    <a href="/api/"><i class="fa fa-book fa-fw"></i> {% trans 'API' %}</a>
-                </li>
-
-                {% if user.is_staff %}
-                <li>
-                    <a href="#"><i class="fa fa-magic fa-fw"></i> {% trans 'Personalisation' %}<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="{% url 'admin:app_setting_change' SETTINGS.id %}"><i class="fa fa-hand-o-right"></i> {% trans 'Brand' %}</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'admin:app_theme_change' SETTINGS.theme.id %}"><i class="fa fa-paint-brush"></i> {% trans 'Theme' %}</a>
-                        </li>
-                    </ul>
-                </li>
-                {% endif %} MIS EN COMMENTAIRE PERSONNELEMENT-->
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
