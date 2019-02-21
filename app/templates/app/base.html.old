@@ -43,21 +43,27 @@
     <div id="wrapper">
         {{ SETTINGS.theme.html_before_header|safe }}
 
-        <nav class="navbar navbar-default navbar-static-top" style="background: #45aaf2;" >
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <!-- <a class="navbar-brand" href="/">
-                <img src="{% static 'app/img/logo512.png' %}" alt="CiDrone" />
-              </a> -->
-            </div>
-            {% block navbar-sidebar %}{% endblock %}
+        <nav id="navbar-top" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
 
-          </div>
+                <a class="navbar-brand" href="/"><img src="{% static 'app/img/logo512.png' %}" alt="CiDrone" /></a> 
+
+                {% block navbar-top-links %}{% endblock %}
+              </div>
+              <!-- COLLAPSE -->
+
+              <!-- COLLAPSE -->
+
+              {% block navbar-sidebar %}{% endblock %}
+
+            </div>
         </nav>
 
         {% block page-wrapper %}{{ SETTINGS.theme.html_after_header|safe }}{% endblock %}
