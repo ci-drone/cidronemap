@@ -348,13 +348,15 @@ table.dataTable thead .sorting:after {
 }
 .bgFooter {
     background:#45aaf2;
-    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
+    height: auto;
     text-align:center;
 }
 .footertext{
-    color:white;
+    color: white;
     font-weight: bold;
 }
+
+

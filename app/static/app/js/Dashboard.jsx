@@ -56,6 +56,7 @@ class Dashboard extends React.Component {
               <i className="glyphicon glyphicon-plus"></i>
               Ajouter un projet
             </button>
+            
           </div>
 
           <EditProjectDialog
