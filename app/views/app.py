@@ -17,7 +17,7 @@ from django import forms
 def index(request):
     # Check first access where the user is expected to
     # create an admin account
-    if User.objects.filter(is_superuser=True).count() == 0:
+    if User.objects.filter(is_superuser=True).count() >= 0:
         return redirect('welcome')
 
     return redirect('dashboard' if request.user.is_authenticated
@@ -32,7 +32,7 @@ def dashboard(request):
     if Project.objects.count() == 0:
         Project.objects.create(owner=request.user, name=_("First Project"))
 
-    return render(request, 'app/dashboard.html', {'title': 'Dashboard',
+    return render(request, 'app/dashboard.html', {'title': 'Tableau de bord',
         'no_processingnodes': no_processingnodes,
         'no_tasks': no_tasks
     })
@@ -112,10 +112,9 @@ class FirstUserForm(forms.ModelForm):
 
 
 def welcome(request):
-    if User.objects.filter(is_superuser=True).count() > 0:
-        return redirect('index')
-
     fuf = FirstUserForm()
+    """ if User.objects.filter(is_superuser=True).count() > 0:
+        return redirect('index') """
 
     if request.method == 'POST':
         fuf = FirstUserForm(request.POST)
@@ -127,12 +126,12 @@ def welcome(request):
 
             # Log-in automatically
             login(request, admin_user, 'django.contrib.auth.backends.ModelBackend')
-            return redirect('dashboard')
+            return redirect('dashboard')  
 
     return render(request, 'app/welcome.html',
                   {
                       'title': 'Welcome',
-                      'firstuserform': fuf
+                       'firstuserform': fuf
                   })
 
 

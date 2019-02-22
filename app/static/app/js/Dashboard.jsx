@@ -3,16 +3,13 @@ import './css/Dashboard.scss';
 import ProjectList from './components/ProjectList';
 import EditProjectDialog from './components/EditProjectDialog';
 import Utils from './classes/Utils';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import $ from 'jquery';
+
 
 class Dashboard extends React.Component {
   constructor(){
     super();
-
     this.handleAddProject = this.handleAddProject.bind(this);
     this.addNewProject = this.addNewProject.bind(this);
   }
@@ -65,7 +62,7 @@ class Dashboard extends React.Component {
             saveAction={this.addNewProject}
             ref={(domNode) => { this.projectDialog = domNode; }}
             />
-          <Route path="/" component={projectList} />
+          <Route path="/" component={projectList} />          
         </div>
       </Router>
     );

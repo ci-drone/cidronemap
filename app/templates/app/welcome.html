@@ -225,16 +225,20 @@
         </div>
     {% else %}
         <h3>{% trans 'Bienvenue! ☺' %}</h3>
-        <div style="margin-bottom: 28px;">Avant de commencer, veuillez creer un compte si nous n'en disposez pas:</div>
+        <div style="margin-bottom: 28px;">Avant de commencer, veuillez creer un compte si nous n'en disposez pas</div>
     {% endif %}
 
-    <form action="" method="post" class="form-horizontal" role="form">{% csrf_token %}
+    <form action="" method="post" class="form-horizontal" role="form">
+        {% csrf_token %}
         {% for field in firstuserform %}
             {% include 'registration/form_field.html' %}
         {% endfor %}
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-default">{% trans 'Creation de compte' %}</button>
+                <button type="submit" class="btn btn-primary">{% trans 'Creation de compte' %}</button>
+                <a class="btn btn-default" href="{% url 'login' %}"> Se connecter</a>
+               <!--  <button type="submit" class="btn btn-default">{% trans 'Creation de compte' %}</button> -->
+
             </div>
         </div>
     </form>

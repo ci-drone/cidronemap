@@ -61,12 +61,14 @@
         </nav>
 
         {% block page-wrapper %}{{ SETTINGS.theme.html_after_header|safe }}{% endblock %}
-    </div>
+</div>
+
 
     {% autoescape off %}
     {% get_footer %}
     {% endautoescape %}
 {% endblock %}
+
 </body>
 <script src="{% static 'app/js/vendor/metisMenu.min.js' %}"></script>
 <script>
