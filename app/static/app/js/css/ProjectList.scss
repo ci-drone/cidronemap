@@ -1,8 +1,7 @@
 .project-list{
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
-    align-content: center;
+   
     padding: 10px;
     ul.project-list.refreshing{
         opacity: 0.5;
