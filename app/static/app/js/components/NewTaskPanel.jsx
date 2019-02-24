@@ -118,8 +118,10 @@ class NewTaskPanel extends React.Component {
             <div>
               <div className="form-group test" >
                 <label className="col-sm-2 control-label">Redimensionnement</label>
+                
                 <div className="col-sm-10">
                     <div className="btn-group">
+                    <br/>
                     <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         {ResizeModes.toHuman(this.state.resizeMode)} <span className="caret"></span>
                     </button>
