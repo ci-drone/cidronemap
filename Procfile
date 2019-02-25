@@ -1,1 +1,1 @@
-web: gunicorn cidrone.wsgi
+web: gunicorn nodeodm.wsgi
