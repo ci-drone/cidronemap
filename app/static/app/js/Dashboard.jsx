@@ -3,6 +3,7 @@ import './css/Dashboard.scss';
 import ProjectList from './components/ProjectList';
 import EditProjectDialog from './components/EditProjectDialog';
 import HowItWork from './components/HowItWork'
+import Description from './components/Description'
 import Utils from './classes/Utils';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import $ from 'jquery';
@@ -17,7 +18,7 @@ class Dashboard extends React.Component {
     this.img = [
       {
         id:1,
-        name:require('../img/1.png')
+        
       }
     ]
   }
@@ -57,6 +58,7 @@ class Dashboard extends React.Component {
     return (
       <Router basename="/dashboard">
         <div>
+          <Description />
           <HowItWork 
             title='How It Work'
             img={this.img}
