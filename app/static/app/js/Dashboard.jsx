@@ -2,9 +2,11 @@ import React from 'react';
 import './css/Dashboard.scss';
 import ProjectList from './components/ProjectList';
 import EditProjectDialog from './components/EditProjectDialog';
+import HowItWork from './components/HowItWork'
 import Utils from './classes/Utils';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import $ from 'jquery';
+
 
 
 class Dashboard extends React.Component {
@@ -12,6 +14,12 @@ class Dashboard extends React.Component {
     super();
     this.handleAddProject = this.handleAddProject.bind(this);
     this.addNewProject = this.addNewProject.bind(this);
+    this.img = [
+      {
+        id:1,
+        name:require('../img/1.png')
+      }
+    ]
   }
 
   handleAddProject(){
@@ -48,22 +56,28 @@ class Dashboard extends React.Component {
 
     return (
       <Router basename="/dashboard">
-        <div className="dash">
-          <div className="text-right add-button">
-            <button type="button"
-                    className="btn btn-primary btn-sm"
-                    onClick={this.handleAddProject}>
-              <i className="glyphicon glyphicon-plus"></i>
-              Ajouter un projet
+        <div>
+          <HowItWork 
+            title='How It Work'
+            img={this.img}
+          />
+          <div className="dash">
+            <div className="text-right add-button">
+              <button type="button"
+                className="btn btn-primary btn-sm"
+                onClick={this.handleAddProject}>
+                <i className="glyphicon glyphicon-plus"></i>
+                Ajouter un projet
             </button>
-            
-          </div>
 
-          <EditProjectDialog
-            saveAction={this.addNewProject}
-            ref={(domNode) => { this.projectDialog = domNode; }}
+            </div>
+
+            <EditProjectDialog
+              saveAction={this.addNewProject}
+              ref={(domNode) => { this.projectDialog = domNode; }}
             />
-          <Route path="/" component={projectList} />          
+            <Route path="/" component={projectList} />
+          </div>
         </div>
       </Router>
     );
