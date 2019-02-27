@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="WebODM Contributors">
-    <link rel="icon" type="image/png" href="{% static 'app/img/cidrone.ico' %}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{% static 'app/img/logo.ico' %}" sizes="32x32">
 
     <link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap.min.css' %}" />
     <link href="{% static 'app/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
@@ -35,6 +35,16 @@
     {% endcompress %}
 
     <style type="text/css">
+    .imgt{
+        -webkit-transition: -webkit-transform .8s ease-in-out;
+        -ms-transition: -ms-transform .8s ease-in-out;
+        transition: transform .8s ease-in-out;
+    }
+    .imgt:hover{
+        transform:rotate(360deg);
+        -ms-transform:rotate(360deg);
+        -webkit-transform:rotate(360deg);
+        }
         {{ SETTINGS.theme.css|safe }}
     </style>
 </head>
@@ -43,7 +53,7 @@
     <div id="wrapper">
         {{ SETTINGS.theme.html_before_header|safe }}
 
-        <nav class="navbar navbar-default navbar-static-top" style="background: #1a242f;" >
+        <nav class="navbar navbar-default navbar-static-top" style="background: #1a242f;"  >
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -52,8 +62,11 @@
                 <span class="icon-bar"></span>
               </button>
               <!-- <a class="navbar-brand" href="/">
-                <img src="{% static 'app/img/logo512.png' %}" alt="CiDrone" />
-              </a> --> 
+                <img src="{% static 'assets/logo.png' %}" alt="CiDrone" />
+              </a>  -->
+              <a class="navbar-link">
+                  <img src="{% static 'assets/logo.png' %}" alt="CiDrone" class="imgt img-responsive"/>
+              </a> 
             </div>
             {% block navbar-sidebar %}{% endblock %}
 
