@@ -20,9 +20,9 @@
 	{% else %}
 
 		{% if no_tasks %}
-			<!-- <h3>{% trans 'Bienvenue' %}</h3> -->
+			<h3>{% trans 'Bienvenue' %}</h3> 
 			{% trans "Selection d'images et GCP" as upload_images %}
-			<!-- <p>
+			<p>
 				{% blocktrans %} Pour creer une carte , appuyer le bouton "{{ upload_images }}", ou glisser quelques images a l'interieur du projet. {% endblocktrans %}
 			</p>
 			<p>
@@ -32,10 +32,41 @@
 					<li>{% trans 'For great 3D, images must overlap by 83%' %}</li>
 					<li>{% trans 'Un <a href="https://github.com/OpenDroneMap/OpenDroneMap/wiki/Running-OpenDroneMap#running-odm-with-ground-control" target="_blank">Fichier GCP</a> est optionnel, mais il peut augmenter la précision du géoréférencement' %}</li>
 				</ul>
-			</p> -->
+			</p>
 			
-
 		{% endif %}
+		
+		<div class="container-fluid" style="margin-top:50px;">
+			<div class="row" style="margin-bottom:50px;">
+				<h1 class="text-center">How It Work</h1>
+			</div>
+			<div class="row">
+
+				<div class="col-md-3 col-sm-3 col-xs-12">
+					<section>
+						{% load static %}
+						<img src="{% static 'assets/01.png' %}" alt="My image" class="img-responsive" width="280" height="280"/>						
+					</section>					
+					<h3 class="text-center">Titre</p>
+				</div>
+
+				<div class="col-md-3 col-sm-3 col-xs-12">
+					{% load static %}
+					<img src="{% static 'assets/02.png' %}" alt="My image" class="img-responsive" width="280" height="280"/>
+					<h3 class="text-center">Titre</p>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-12">
+					{% load static %}
+					<img src="{% static 'assets/03.png' %}" alt="My image" class="img-responsive" width="280" height="280"/>
+					<h3 class="text-center">Titre</p>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-12">
+					{% load static %}
+					<img src="{% static 'assets/04.png' %}" alt="My image" class="img-responsive" width="280" height="280"/>
+					<h3 class="text-center">Titre</p>
+				</div>				
+			</div>
+		</div>
 		
 		<div id="dashboard-app" data-dashboard></div>
 

@@ -2,8 +2,8 @@ import React from 'react';
 import './css/Dashboard.scss';
 import ProjectList from './components/ProjectList';
 import EditProjectDialog from './components/EditProjectDialog';
-import HowItWork from './components/HowItWork'
-import Description from './components/Description'
+/* import HowItWork from './components/HowItWork'
+import Description from './components/Description' */
 import Utils from './classes/Utils';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import $ from 'jquery';
@@ -15,12 +15,6 @@ class Dashboard extends React.Component {
     super();
     this.handleAddProject = this.handleAddProject.bind(this);
     this.addNewProject = this.addNewProject.bind(this);
-    this.img = [
-      {
-        id:1,
-        
-      }
-    ]
   }
 
   handleAddProject(){
@@ -58,11 +52,11 @@ class Dashboard extends React.Component {
     return (
       <Router basename="/dashboard">
         <div>
-          <Description />
+         {/*  <Description />
           <HowItWork 
             title='How It Work'
             img={this.img}
-          />
+          /> */}
           <div className="dash">
             <div className="text-right add-button">
               <button type="button"
