@@ -1,7 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
 import '../css/ProjectList.scss';
-
 import ProjectListItem from './ProjectListItem';
 import Paginated from './Paginated';
 import Paginator from './Paginator';
@@ -24,7 +23,7 @@ class ProjectList extends Paginated {
             projects: []
         }
 
-        this.PROJECTS_PER_PAGE = 10;
+        this.PROJECTS_PER_PAGE = 6;
 
         this.handleDelete = this.handleDelete.bind(this);
     }
@@ -43,7 +42,7 @@ class ProjectList extends Paginated {
         this.setState({refreshing: true});
 
         // Load projects from API
-        this.serverRequest = 
+        this.serverRequest =
             $.getJSON(this.props.source, json => {
                 if (json.results){
                     this.setState({
@@ -52,15 +51,15 @@ class ProjectList extends Paginated {
                     });
                     this.updatePagination(this.PROJECTS_PER_PAGE, json.count);
                 }else{
-                    this.setState({ 
-                        error: `Invalid JSON response: ${JSON.stringify(json)}`,
+                    this.setState({
+                        error: `Reponse JSON invalide: ${JSON.stringify(json)}`,
                         loading: false
                     });
                 }
             })
             .fail((jqXHR, textStatus, errorThrown) => {
-                this.setState({ 
-                    error: `Could not load projects list: ${textStatus}`,
+                this.setState({
+                    error: `Impossible de charger la liste des projets: ${textStatus}`,
                     loading: false
                 });
             })
@@ -87,22 +86,25 @@ class ProjectList extends Paginated {
 
     render() {
         if (this.state.loading){
-            return (<div className="project-list">Loading projects... <i className="fa fa-refresh fa-spin fa-fw"></i></div>);
+            return (<div className="project-list">Chargement de projet... <i className="fa fa-refresh fa-spin fa-fw"></i></div>);
         }else{
-            return (<div className="project-list">
+            return (
+              <div className="project-list">
                 <ErrorMessage bind={[this, 'error']} />
                 <Paginator className="text-right" {...this.state.pagination} {...this.props}>
                     <ul className={"list-group project-list " + (this.state.refreshing ? "refreshing" : "")}>
                         {this.state.projects.map(p => (
-                            <ProjectListItem 
-                                key={p.id} 
-                                data={p} 
-                                onDelete={this.handleDelete} 
-                                history={this.props.history} /> 
+                            <ProjectListItem
+                              key={p.id}
+                              data={p}
+                              onDelete={this.handleDelete}
+                              history={this.props.history}
+                            />
                         ))}
                     </ul>
                 </Paginator>
-            </div>);
+              </div>
+            );
         }
     }
 }

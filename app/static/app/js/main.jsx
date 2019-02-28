@@ -5,6 +5,7 @@ import React from 'react';
 import $ from 'jquery';
 import PluginsAPI from './classes/plugins/API';
 
+
 // Main is always executed first in the page
 
 // We share some objects to avoid having to include them
@@ -15,4 +16,3 @@ window.React = React;
 $(function(){
     PluginsAPI.App.triggerReady();
 });
-

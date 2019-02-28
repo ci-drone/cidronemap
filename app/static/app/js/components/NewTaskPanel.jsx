@@ -7,6 +7,7 @@ import ResizeModes from '../classes/ResizeModes';
 import update from 'immutability-helper';
 import PluginsAPI from '../classes/plugins/API';
 
+
 class NewTaskPanel extends React.Component {
   static defaultProps = {
     filesCount: 0,
@@ -65,6 +66,7 @@ class NewTaskPanel extends React.Component {
   }
 
   cancel = (e) => {
+<<<<<<< HEAD
     if (this.state.inReview){
       this.setState({inReview: false});
     }else{
@@ -72,6 +74,11 @@ class NewTaskPanel extends React.Component {
         if (window.confirm("Are you sure you want to cancel?")){
           this.props.onCancel();
         }
+=======
+    if (this.props.onCancel){
+      if (window.confirm("Etes vous sure de l'annuler?")){
+        this.props.onCancel();
+>>>>>>> 4e916d99a3fd9befc8e4ae885511fb8006b26a88
       }
     }
   }
@@ -79,7 +86,7 @@ class NewTaskPanel extends React.Component {
   getTaskInfo(){
     return Object.assign(this.taskForm.getTaskInfo(), {
       resizeSize: this.state.resizeSize,
-      resizeMode: this.state.resizeMode 
+      resizeMode: this.state.resizeMode
     });
   }
 
@@ -98,7 +105,7 @@ class NewTaskPanel extends React.Component {
     let n = parseInt(e.target.value.replace(/[^\d]*/g, ""));
     if (isNaN(n)) n = "";
     this.setState({resizeSize: n});
-    
+
     setTimeout(() => {
         this.handleFormChanged();
     }, 0);
@@ -116,6 +123,7 @@ class NewTaskPanel extends React.Component {
     return (
       <div className="new-task-panel theme-background-highlight">
         <div className="form-horizontal">
+<<<<<<< HEAD
           <div className={this.state.inReview ? "disabled" : ""}>
             <p>{this.props.filesCount} files selected. Please check these additional options:</p>
             <EditTaskForm
@@ -154,6 +162,46 @@ class NewTaskPanel extends React.Component {
                       <span>px</span>
                       </div>
                   </div>
+=======
+          <p>{this.props.filesCount} fichier(s) selectionne(s). Veuilez verifier les options:</p>
+          <EditTaskForm
+            onFormLoaded={this.handleFormTaskLoaded}
+            onFormChanged={this.handleFormChanged}
+            ref={(domNode) => { if (domNode) this.taskForm = domNode; }}
+          />
+
+          {this.state.editTaskFormLoaded ?
+            <div>
+              <div className="form-group test" >
+                <label className="col-sm-2 control-label">Redimensionnement</label>
+                
+                <div className="col-sm-10">
+                    <div className="btn-group">
+                    <br/>
+                    <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        {ResizeModes.toHuman(this.state.resizeMode)} <span className="caret"></span>
+                    </button>
+                    <ul className="dropdown-menu">
+                        {ResizeModes.all().map(mode =>
+                        <li key={mode}>
+                            <a href="javascript:void(0);"
+                                onClick={this.setResizeMode(mode)}>
+                                <i style={{opacity: this.state.resizeMode === mode ? 1 : 0}} className="fa fa-check"></i> {ResizeModes.toHuman(mode)}</a>
+                        </li>
+                        )}
+                    </ul>
+                    </div>
+                    <div className={"resize-control " + (this.state.resizeMode === ResizeModes.NO ? "hide" : "")}>
+                    <input
+                        type="number"
+                        step="100"
+                        className="form-control"
+                        onChange={this.handleResizeSizeChange}
+                        value={this.state.resizeSize}
+                    />
+                    <span>px</span>
+                    </div>
+>>>>>>> 4e916d99a3fd9befc8e4ae885511fb8006b26a88
                 </div>
                 {this.state.items.map((Item, i) => <div key={i} className="form-group">
                   <Item taskInfo={this.state.taskInfo}
@@ -165,11 +213,16 @@ class NewTaskPanel extends React.Component {
             : ""}
           </div>
 
-          {this.state.editTaskFormLoaded ? 
+          {this.state.editTaskFormLoaded ?
             <div className="form-group">
               <div className="col-sm-offset-2 col-sm-10 text-right">
+<<<<<<< HEAD
                 {this.props.onCancel !== undefined && <button type="submit" className="btn btn-danger" onClick={this.cancel} style={{marginRight: 4}}><i className="glyphicon glyphicon-remove-circle"></i> Cancel</button>}
                 <button type="submit" className="btn btn-primary" onClick={this.save} disabled={this.props.filesCount <= 1}><i className="glyphicon glyphicon-saved"></i> {!this.state.inReview ? "Review" : "Start Processing"}</button>
+=======
+                {this.props.onCancel !== undefined && <button type="submit" className="btn btn-danger" onClick={this.cancel} style={{marginRight: 4}}><i className="glyphicon glyphicon-remove-circle"></i>Annuler</button>}
+                <button type="submit" className="btn btn-primary" onClick={this.save} disabled={this.props.filesCount <= 1}><i className="glyphicon glyphicon-saved"></i> Demarrez le traitement</button>
+>>>>>>> 4e916d99a3fd9befc8e4ae885511fb8006b26a88
               </div>
             </div>
             : ""}

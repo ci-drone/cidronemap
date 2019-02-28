@@ -18,7 +18,7 @@ class ShareButton extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = { 
+    this.state = {
       showPopup: false,
       task: props.task
     };
@@ -40,7 +40,7 @@ class ShareButton extends React.Component {
   }
 
   render() {
-    const popup = <SharePopup 
+    const popup = <SharePopup
             task={this.state.task}
             taskChanged={this.handleTaskChanged}
             placement={this.props.popupPlacement}
@@ -49,15 +49,15 @@ class ShareButton extends React.Component {
 
     return (
       <div className="shareButton" onClick={e => { e.stopPropagation(); }}>
-        {this.props.popupPlacement === 'top' && this.state.showPopup ? 
+        {this.props.popupPlacement === 'top' && this.state.showPopup ?
           popup : ""}
-        <button 
+        <button
           type="button"
           onClick={this.handleClick}
           className={"shareButton btn btn-sm " + (this.state.task.public ? "btn-primary" : "btn-secondary")}>
-          <i className="fa fa-share-alt"></i> Share
+          <i className="fa fa-share-alt"></i> Partager
         </button>
-        {this.props.popupPlacement === 'bottom' && this.state.showPopup ? 
+        {this.props.popupPlacement === 'bottom' && this.state.showPopup ?
           popup : ""}
       </div>
     );

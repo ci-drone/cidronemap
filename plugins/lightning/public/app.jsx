@@ -35,9 +35,9 @@ export default class LightningPanel extends React.Component {
     return (<div className="plugin-lightning">
         { !apiKey ? 
         <div>
-            <h4><i className="fa fa-bolt"/> Lightning Network</h4>
-            Lightning is a service that allows you to quickly process small and large datasets using high performance servers in the cloud. 
-            Below you can enter your <a href="https://webodm.net" target="_blank">webodm.net</a> credentials to sync your account and automatically setup a new processing node. If you don't have an account, you can <a href="https://webodm.net/register" target="_blank">register</a> for free.
+            <h4><i className="fa fa-bolt"/> Service Lightning</h4>
+            Lightning est un service qui vous permet de traiter rapidement des ensembles de données petits et grands à l'aide de serveurs performant dans le cloud.
+            Ci-dessous, vous pouvez entrer vos coordonnees <a href="https://webodm.net" target="_blank">webodm.net</a> pour synchroniser votre compte et configurer automatiquement un nouveau noeud de traitement. Si vous n'avez pas de compte, vous pouvez le<a href="https://webodm.net/register" target="_blank">creer</a> gratuitement.
             <Login onLogin={this.handleLogin} />
         </div> : 
         <div>

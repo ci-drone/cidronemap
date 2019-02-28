@@ -51,7 +51,7 @@ case $key in
     export WO_PORT="$2"
     shift # past argument
     shift # past value
-    ;;    
+    ;;
     --hostname)
     export WO_HOST="$2"
     shift # past argument
@@ -115,7 +115,7 @@ usage(){
   echo "Usage: $0 <command>"
   echo
   echo "This program helps to manage the setup/teardown of the docker containers for running WebODM. We recommend that you read the full documentation of docker at https://docs.docker.com if you want to customize your setup."
-  echo 
+  echo
   echo "Command list:"
   echo "	start [options]		Start WebODM"
   echo "	stop			Stop WebODM"
@@ -156,16 +156,16 @@ check_command(){
 	check_msg_prefix="Checking for $1... "
 	check_msg_result="\033[92m\033[1m OK\033[0m\033[39m"
 
-	hash $1 2>/dev/null || not_found=true 
+	hash $1 2>/dev/null || not_found=true
 	if [[ $not_found ]]; then
-		
+
 		# Can we attempt to install it?
 		if [[ ! -z "$3" ]]; then
 			echo -e "$check_msg_prefix \033[93mnot found, we'll attempt to install\033[39m"
 			run "$3 || sudo $3"
 
 			# Recurse, but don't pass the install command
-			check_command "$1" "$2"	
+			check_command "$1" "$2"
 		else
 			check_msg_result="\033[91m can't find $1! Check that the program is installed and that you have added the proper path to the program to your PATH environment variable before launching WebODM. If you change your PATH environment variable, remember to close and reopen your terminal. $2\033[39m"
 		fi
@@ -218,10 +218,13 @@ start(){
         command+=" -f docker-compose.nodeodm.yml"
     fi
 
+<<<<<<< HEAD
     if [[ $dev_mode = true ]]; then
         command+=" -f docker-compose.dev.yml"
     fi
 	
+=======
+>>>>>>> 4e916d99a3fd9befc8e4ae885511fb8006b26a88
 	if [ "$WO_SSL" = "YES" ]; then
 		if [ ! -z "$WO_SSL_KEY" ] && [ ! -e "$WO_SSL_KEY" ]; then
 			echo -e "\033[91mSSL key file does not exist: $WO_SSL_KEY\033[39m"
@@ -231,9 +234,9 @@ start(){
 			echo -e "\033[91mSSL certificate file does not exist: $WO_SSL_CERT\033[39m"
 			exit 1
 		fi
-		
+
 		command+=" -f docker-compose.ssl.yml"
-		
+
 		method="Lets Encrypt"
 		if [ ! -z "$WO_SSL_KEY" ] && [ ! -z "$WO_SSL_CERT" ]; then
 			method="Manual"
@@ -250,7 +253,7 @@ start(){
 			fi
 			export WO_PORT=443
 		fi
-		
+
 		# Make sure we have a hostname
 		if [ "$WO_HOST" = "localhost" ]; then
 			echo -e "\033[91mSSL is enabled, but hostname cannot be set to $WO_HOST. Set the --hostname argument to the domain of your WebODM server (for example: www.mywebodm.org).\033[39m"
@@ -334,7 +337,7 @@ plugin_disable(){
     plugin_name="$1"
     plugin_check $plugin_name
     plugin_volume_check
-    
+
     if [ ! -e "plugins/$plugin_name/disabled" ]; then
         touch "plugins/$plugin_name/disabled"
         echo "Plugin disabled. Run ./webodm.sh restart to apply the changes."

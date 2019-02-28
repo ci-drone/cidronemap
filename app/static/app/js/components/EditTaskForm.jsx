@@ -70,8 +70,8 @@ class EditTaskForm extends React.Component {
   }
 
   formReady(){
-    return this.state.loadedProcessingNodes && 
-            this.state.selectedNode && 
+    return this.state.loadedProcessingNodes &&
+            this.state.selectedNode &&
             this.state.loadedPresets &&
             this.state.selectedPreset;
   }
@@ -85,14 +85,14 @@ class EditTaskForm extends React.Component {
       this.setState({error: "Could not load list of processing nodes. Are you connected to the internet?"});
     }
 
-    this.nodesRequest = 
+    this.nodesRequest =
       $.getJSON("/api/processingnodes/?has_available_options=True", json => {
         if (Array.isArray(json)){
           // No nodes with options?
           const noProcessingNodesError = (nodes) => {
             var extra = nodes ? "We tried to reach:<ul>" + nodes.map(n => Utils.html`<li><a href="${n.url}">${n.label}</a></li>`).join("") + "</ul>" : "";
             this.setState({error: `There are no usable processing nodes. ${extra}Make sure that at least one processing node is reachable and
-             that you have granted the current user sufficient permissions to view 
+             that you have granted the current user sufficient permissions to view
              the processing node (by going to Administration -- Processing Nodes -- Select Node -- Object Permissions -- Add User/Group and check CAN VIEW PROCESSING NODE).
              If you are bringing a node back online, it will take about 30 seconds for WebODM to recognize it.`});
           };
@@ -170,7 +170,7 @@ class EditTaskForm extends React.Component {
       })
       .fail((jqXHR, textStatus, errorThrown) => {
         // I don't expect this to fail, unless it's a development error or connection error.
-        // in which case we don't need to notify the user directly. 
+        // in which case we don't need to notify the user directly.
         failed();
       });
   }
@@ -190,7 +190,7 @@ class EditTaskForm extends React.Component {
         options.forEach(opt => {
           dict[opt.name] = opt.value;
         });
-        
+
         let matchingOptions = 0;
         for (let j = 0; j < preset.options.length; j++){
           if (dict[preset.options[j].name] !== preset.options[j].value){
@@ -213,7 +213,7 @@ class EditTaskForm extends React.Component {
       this.setState({error: "Could not load list of presets. Are you connected to the internet?"});
     }
 
-    this.presetsRequest = 
+    this.presetsRequest =
       $.getJSON("/api/presets/?ordering=-system,-created_at", presets => {
         if (Array.isArray(presets)){
           // Add custom preset
@@ -229,7 +229,7 @@ class EditTaskForm extends React.Component {
           let selectedPreset = presets[0],
               defaultPreset = presets.find(p => p.name === "Default"); // Do not translate Default
           if (defaultPreset) selectedPreset = defaultPreset;
-          
+
           // If task's options are set attempt
           // to find a preset that matches the current task options
           if (this.props.task && Array.isArray(this.props.task.options) && this.props.task.options.length > 0){
@@ -250,8 +250,8 @@ class EditTaskForm extends React.Component {
           }
 
           this.setState({
-            loadedPresets: true, 
-            presets: presets, 
+            loadedPresets: true,
+            presets: presets,
             selectedPreset: selectedPreset
           });
           this.notifyFormLoaded();
@@ -262,7 +262,7 @@ class EditTaskForm extends React.Component {
       })
       .fail((jqXHR, textStatus, errorThrown) => {
         // I don't expect this to fail, unless it's a development error or connection error.
-        // in which case we don't need to notify the user directly. 
+        // in which case we don't need to notify the user directly.
         failed();
       });
   }
@@ -285,7 +285,7 @@ class EditTaskForm extends React.Component {
     // Monitor changes of certain form items (user driven)
     // and fire event when appropriate
     if (!this.formReady()) return;
-    
+
     let changed = false;
     ['name', 'selectedNode', 'selectedPreset'].forEach(prop => {
         if (prevState[prop] !== this.state[prop]) changed = true;
@@ -418,7 +418,7 @@ class EditTaskForm extends React.Component {
       dataType: 'json',
       type: 'POST'
     }).done(preset => {
-      // If the original preset was a custom one, 
+      // If the original preset was a custom one,
       // we remove it from the list (since we just saved it)
       if (isCustom){
         presets.splice(presets.indexOf(selectedPreset), 1);
@@ -442,7 +442,7 @@ class EditTaskForm extends React.Component {
       return;
     }
 
-    if (window.confirm(`Are you sure you want to delete "${selectedPreset.name}"?`)){
+    if (window.confirm(`Etes vous sure de supprimer? "${selectedPreset.name}"?`)){
       this.setState({presetActionPerforming: true});
 
       return $.ajax({
@@ -470,7 +470,7 @@ class EditTaskForm extends React.Component {
           <div className="alert alert-warning">
               <div dangerouslySetInnerHTML={{__html:this.state.error}}></div>
               <button className="btn btn-sm btn-primary" onClick={this.retryLoad}>
-                <i className="fa fa-rotate-left"></i> Retry
+                <i className="fa fa-rotate-left"></i> Ressayer
               </button>
           </div>
         </div>);
@@ -485,7 +485,7 @@ class EditTaskForm extends React.Component {
             <label className="col-sm-2 control-label">Processing Node</label>
               <div className="col-sm-10">
                 <select className="form-control" value={this.state.selectedNode.key} onChange={this.handleSelectNode}>
-                {this.state.processingNodes.map(node => 
+                {this.state.processingNodes.map(node =>
                   <option value={node.key} key={node.key} disabled={!node.enabled}>{node.label}</option>
                 )}
                 </select>
@@ -494,12 +494,12 @@ class EditTaskForm extends React.Component {
           <div className="form-group form-inline">
             <label className="col-sm-2 control-label">Options</label>
             <div className="col-sm-10">
-              <select 
+              <select
                   title={this.getAvailableOptionsOnlyText(this.state.selectedPreset.options, this.state.selectedNode.options)}
-                  className="form-control" 
-                  value={this.state.selectedPreset.id} 
+                  className="form-control"
+                  value={this.state.selectedPreset.id}
                   onChange={this.handleSelectPreset}>
-                {this.state.presets.map(preset => 
+                {this.state.presets.map(preset =>
                   <option value={preset.id} key={preset.id} className={preset.system ? "system-preset" : ""}>{preset.name}</option>
                 )}
               </select>
@@ -514,21 +514,21 @@ class EditTaskForm extends React.Component {
                   </button>
                   <ul className="dropdown-menu">
                     <li>
-                      <a href="javascript:void(0);" onClick={this.handleEditPreset}><i className="fa fa-sliders"></i> Edit</a>
+                      <a href="javascript:void(0);" onClick={this.handleEditPreset}><i className="fa fa-sliders"></i> Modifier</a>
                     </li>
                     <li className="divider"></li>
 
                     {this.state.selectedPreset.id !== -1 ?
                       <li>
-                        <a href="javascript:void(0);" onClick={this.handleDuplicateSavePreset}><i className="fa fa-copy"></i> Duplicate</a>
+                        <a href="javascript:void(0);" onClick={this.handleDuplicateSavePreset}><i className="fa fa-copy"></i> Dupliquer</a>
                       </li>
                     :
                       <li>
-                        <a href="javascript:void(0);" onClick={this.handleDuplicateSavePreset}><i className="fa fa-save"></i> Save</a>
+                        <a href="javascript:void(0);" onClick={this.handleDuplicateSavePreset}><i className="fa fa-save"></i> Enregister</a>
                       </li>
                     }
                     <li className={this.state.selectedPreset.system ? "disabled" : ""}>
-                      <a href="javascript:void(0);" onClick={this.handleDeletePreset}><i className="fa fa-trash-o"></i> Delete</a>
+                      <a href="javascript:void(0);" onClick={this.handleDeletePreset}><i className="fa fa-trash-o"></i> Supprimer</a>
                     </li>
                   </ul>
                 </div>
@@ -537,7 +537,7 @@ class EditTaskForm extends React.Component {
             </div>
           </div>
 
-          {this.state.editingPreset ? 
+          {this.state.editingPreset ?
             <EditPresetDialog
               preset={this.state.selectedPreset}
               availableOptions={this.state.selectedNode.options}
@@ -559,13 +559,13 @@ class EditTaskForm extends React.Component {
     return (
       <div className="edit-task-form">
         <div className="form-group">
-          <label className="col-sm-2 control-label">Name</label>
+          <label className="col-sm-2 control-label">Nom</label>
           <div className="col-sm-10">
-            <input type="text" 
-              onChange={this.handleNameChange} 
+            <input type="text"
+              onChange={this.handleNameChange}
               className="form-control"
-              placeholder={this.namePlaceholder} 
-              value={this.state.name} 
+              placeholder={this.namePlaceholder}
+              value={this.state.name}
             />
           </div>
         </div>

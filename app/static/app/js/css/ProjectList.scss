@@ -1,6 +1,11 @@
 .project-list{
+    display: flex;
+    flex-flow: row wrap;
+   
+    padding: 10px;
     ul.project-list.refreshing{
         opacity: 0.5;
         pointer-events: none;
     }
+
 }

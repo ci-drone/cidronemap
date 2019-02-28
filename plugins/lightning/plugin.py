@@ -21,7 +21,7 @@ def JsonResponse(dict):
 
 class Plugin(PluginBase):
     def main_menu(self):
-        return [Menu("Lightning Network", self.public_url(""), "fa fa-bolt fa-fw")]
+        return [Menu("Service Lightning", self.public_url(""), "fa fa-bolt fa-fw")]
 
     def include_js_files(self):
         return ['add_cost_estimate.js']
@@ -35,7 +35,7 @@ class Plugin(PluginBase):
             uds = UserDataStore('lightning', request.user)
 
             return render(request, self.template_path("index.html"), {
-                'title': 'Lightning Network',
+                'title': 'Service Lightning',
                 'api_key': uds.get_string("api_key")
             })
 

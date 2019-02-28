@@ -2,17 +2,17 @@ import React from 'react';
 import './css/Dashboard.scss';
 import ProjectList from './components/ProjectList';
 import EditProjectDialog from './components/EditProjectDialog';
+/* import HowItWork from './components/HowItWork'
+import Description from './components/Description' */
 import Utils from './classes/Utils';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import $ from 'jquery';
+
+
 
 class Dashboard extends React.Component {
   constructor(){
     super();
-    
     this.handleAddProject = this.handleAddProject.bind(this);
     this.addNewProject = this.addNewProject.bind(this);
   }
@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
   }
 
   addNewProject(project){
-    if (!project.name) return (new $.Deferred()).reject("Name field is required");
+    if (!project.name) return (new $.Deferred()).reject("Nom du projet manquant");
 
     return $.ajax({
           url: `/api/projects/`,
@@ -43,29 +43,37 @@ class Dashboard extends React.Component {
 
       return <ProjectList
                 source={`/api/projects/?ordering=-created_at&page=${page}`}
-                ref={(domNode) => { this.projectList = domNode; }} 
+                ref={(domNode) => { this.projectList = domNode; }}
                 currentPage={page}
                 history={history}
-                />;
+              />;
     };
 
     return (
       <Router basename="/dashboard">
         <div>
-          <div className="text-right add-button">
-            <button type="button" 
-                    className="btn btn-primary btn-sm"
-                    onClick={this.handleAddProject}>
-              <i className="glyphicon glyphicon-plus"></i>
-              Add Project
+         {/*  <Description />
+          <HowItWork 
+            title='How It Work'
+            img={this.img}
+          /> */}
+          <div className="dash">
+            <div className="text-right add-button">
+              <button type="button"
+                className="btn btn-primary btn-sm"
+                onClick={this.handleAddProject}>
+                <i className="glyphicon glyphicon-plus"></i>
+                Ajouter un projet
             </button>
-          </div>
 
-          <EditProjectDialog 
-            saveAction={this.addNewProject}
-            ref={(domNode) => { this.projectDialog = domNode; }}
+            </div>
+
+            <EditProjectDialog
+              saveAction={this.addNewProject}
+              ref={(domNode) => { this.projectDialog = domNode; }}
             />
-          <Route path="/" component={projectList} />
+            <Route path="/" component={projectList} />
+          </div>
         </div>
       </Router>
     );
@@ -83,8 +91,8 @@ $(function(){
     // Yes it's a hack. No we're not going to track state in React just
     // for this.
     window.onbeforeunload = function() {
-        let found = false; 
-        $(".progress-bar:visible").each(function(){ 
+        let found = false;
+        $(".progress-bar:visible").each(function(){
             try{
                 let value = parseFloat($(this).text());
                 if (!isNaN(value) && value > 0 && value < 100) found = true;
@@ -92,7 +100,7 @@ $(function(){
                 // Do nothing
             }
         });
-        return found ? "Your changes will be lost. Are you sure you want to leave?" : undefined; 
+        return found ? "Vos changements seront perdu. Etes vous sure de quitter?" : undefined;
     };
 });
 

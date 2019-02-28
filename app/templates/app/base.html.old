@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load i18n static settings compress plugins %}
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="WebODM Contributors">
+    <link rel="icon" type="image/png" href="{% static 'app/img/cidrone.ico' %}" sizes="32x32">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap.min.css' %}" />
+    <link href="{% static 'app/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'app/css/metisMenu.min.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/sb-admin-2.css' %}" rel="stylesheet">
+    {% block extra-headers %}{% endblock %}
+
+    <script src="{% static 'app/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <script src="{% static 'app/js/vendor/es6-shim.min.js' %}"></script>
+    <script src="{% static 'app/js/vendor/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static 'app/js/vendor/system.js' %}"></script>
+
+    {% load render_bundle from webpack_loader %}
+    {% render_bundle 'main' %}
+
+    {% autoescape off %}
+    {% get_plugins_js_includes %}
+    {% get_plugins_css_includes %}
+    {% endautoescape %}
+
+    <title>{{title|default:"Connexion"}} - CIDrone</title>
+
+    {% compress css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'app/css/theme.scss' %}" />
+    {% endcompress %}
+
+    <style type="text/css">
+        {{ SETTINGS.theme.css|safe }}
+    </style>
+</head>
+<body data-admin-utc-offset="{% now "Z" %}">
+{% block body %}
+    <div id="wrapper">
+        {{ SETTINGS.theme.html_before_header|safe }}
+
+        <nav id="navbar-top" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="/"><img src="{% static 'app/img/logo512.png' %}" alt="CiDrone" /></a> 
+
+                {% block navbar-top-links %}{% endblock %}
+              </div>
+              <!-- COLLAPSE -->
+
+              <!-- COLLAPSE -->
+
+              {% block navbar-sidebar %}{% endblock %}
+
+            </div>
+        </nav>
+
+        {% block page-wrapper %}{{ SETTINGS.theme.html_after_header|safe }}{% endblock %}
+    </div>
+
+    {% autoescape off %}
+    {% get_footer %}
+    {% endautoescape %}
+{% endblock %}
+</body>
+<script src="{% static 'app/js/vendor/metisMenu.min.js' %}"></script>
+<script>
+$(function(){
+    $('#side-menu').metisMenu();
+
+    $(window).bind("load resize", function() {
+        let topOffset = 50;
+        let width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
+        if (width < 768) {
+            $('div.navbar-collapse').addClass('collapse');
+            topOffset = 100; // 2-row-menu
+        } else {
+            $('div.navbar-collapse').removeClass('collapse');
+        }
+
+        let height = ((this.window.innerHeight > 0) ? this.window.innerHeight : this.screen.height) - 1;
+        height = height - topOffset;
+        if (height < 1) height = 1;
+        if (height > topOffset) {
+            $("#page-wrapper").css("min-height", (height) + "px");
+        }
+    });
+
+    let url = window.location;
+    let element = $('ul.nav a').filter(function() {
+     return this.href == url;
+    }).addClass('active').parent();
+
+    while(true){
+        if (element.is('li')){
+            element = element.parent().addClass('in').parent();
+        } else {
+            break;
+        }
+    }
+});
+
+</script>
+<script src="{% static 'app/js/vendor/bootstrap.min.js' %}"></script>
+{{ SETTINGS.theme.html_after_body|safe }}
+</html>

@@ -1,5 +1,5 @@
-import '../css/ProjectListItem.scss';
 import React from 'react';
+import '../css/ProjectListItem.scss';
 import update from 'immutability-helper';
 import TaskList from './TaskList';
 import NewTaskPanel from './NewTaskPanel';
@@ -53,7 +53,7 @@ class ProjectListItem extends React.Component {
     // Update project information based on server
     this.setState({refreshing: true});
 
-    this.refreshRequest = 
+    this.refreshRequest =
       $.getJSON(`/api/projects/${this.state.data.id}/`)
         .done((json) => {
           this.setState({data: json});
@@ -118,7 +118,7 @@ class ProjectListItem extends React.Component {
           clickable: this.uploadButton,
           chunkSize: 2147483647,
           timeout: 2147483647,
-          
+
           headers: {
             [csrf.header]: csrf.token
           },
@@ -203,8 +203,19 @@ class ProjectListItem extends React.Component {
             try{
               let response = JSON.parse(files[0].xhr.response);
               if (!response.id) throw new Error(`Expected id field, but none given (${response})`);
+<<<<<<< HEAD
               
               this.newTaskAdded();
+=======
+
+              if (this.state.showTaskList){
+                this.taskList.refresh();
+              }else{
+                this.setState({showTaskList: true});
+              }
+              this.resetUploadState();
+              this.refresh();
+>>>>>>> 4e916d99a3fd9befc8e4ae885511fb8006b26a88
             }catch(e){
               this.setUploadState({error: `Invalid response from server: ${e.message}`, uploading: false})
             }
@@ -263,7 +274,7 @@ class ProjectListItem extends React.Component {
     const showTaskList = !this.state.showTaskList;
 
     this.historyNav.toggleQSListItem("project_task_open", this.state.data.id, showTaskList);
-    
+
     this.setState({
       showTaskList: showTaskList
     });
@@ -356,16 +367,17 @@ class ProjectListItem extends React.Component {
     const numTasks = data.tasks.length;
 
     return (
-      <li className={"project-list-item list-group-item " + (refreshing ? "refreshing" : "")}
+      <div className="card">
+      <li className={"project-list-item list-group-item " + (refreshing ? "Actualisation" : "")}
          href="javascript:void(0);"
          ref={this.setRef("dropzone")}
          >
 
-        <EditProjectDialog 
+        <EditProjectDialog
           ref={(domNode) => { this.editProjectDialog = domNode; }}
-          title="Edit Project"
-          saveLabel="Save Changes"
-          savingLabel="Saving changes..."
+          title="Modifier Projet"
+          saveLabel="Enregistrer les modifications"
+          savingLabel="Enregistrement en cours..."
           saveIcon="fa fa-edit"
           projectName={data.name}
           projectDescr={data.description}
@@ -376,6 +388,7 @@ class ProjectListItem extends React.Component {
         <div className="row no-margin">
           <ErrorMessage bind={[this, 'error']} />
           <div className="btn-group pull-right">
+<<<<<<< HEAD
             {this.hasPermission("add") ? 
               <div className={"asset-download-buttons btn-group " + (this.state.upload.uploading ? "hide" : "")}>
                 <button type="button" 
@@ -388,61 +401,88 @@ class ProjectListItem extends React.Component {
               <ul className="dropdown-menu">
                 <li><a href="javascript:void(0);" onClick={this.handleImportTask}><i className="glyphicon glyphicon-import"></i> Import Existing Assets</a></li>
              </ul></div>
-            : ""}
+=======
+            <div className="project-name">
+            {data.name}
 
-            <button disabled={this.state.upload.error !== ""} 
-                    type="button"
-                    className={"btn btn-danger btn-sm " + (!this.state.upload.uploading ? "hide" : "")} 
-                    onClick={this.cancelUpload}>
-              <i className="glyphicon glyphicon-remove-circle"></i>
-              Cancel Upload
-            </button> 
+            <div className="row project-links">
+              {numTasks > 0 ?
+                <span>
+                  <i className='fa fa-tasks'>
+                  </i> <a href="javascript:void(0);" onClick={this.toggleTaskList}>
+                    {numTasks} Tasks <i className={'fa fa-caret-' + (this.state.showTaskList ? 'down' : 'right')}></i>
+                  </a>
+                </span>
+                : ""}
 
-            <button type="button" className="btn btn-default btn-sm" onClick={this.viewMap}>
-              <i className="fa fa-globe"></i> View Map
-            </button>
+              <div className="modif">
+                <i className='fa fa-edit'></i>
+                <a href="javascript:void(0);" onClick={this.handleEditProject}> Modifier </a>
+              </div>
+            </div>
+
+
           </div>
 
-          <span className="project-name">
-            {data.name}
-          </span>
           <div className="project-description">
             {data.description}
           </div>
-          <div className="row project-links">
-            {numTasks > 0 ? 
-              <span>
-                <i className='fa fa-tasks'>
-                </i> <a href="javascript:void(0);" onClick={this.toggleTaskList}>
-                  {numTasks} Tasks <i className={'fa fa-caret-' + (this.state.showTaskList ? 'down' : 'right')}></i>
-                </a>
-              </span>
-              : ""}
 
-            <i className='fa fa-edit'>
-            </i> <a href="javascript:void(0);" onClick={this.handleEditProject}> Edit
-            </a>
+            {this.hasPermission("add") ?
+              <button type="button"
+                      className={"btn btn-primary btn-sm " + (this.state.upload.uploading ? "hide" : "")}
+                      onClick={this.handleUpload}
+                      ref={this.setRef("uploadButton")}>
+                <i className="glyphicon glyphicon-upload"></i>
+                Selection d'images et GCP
+              </button>
+>>>>>>> 4e916d99a3fd9befc8e4ae885511fb8006b26a88
+            : ""}
+
+            <button disabled={this.state.upload.error !== ""}
+                    type="button"
+                    className={"btn btn-danger btn-sm " + (!this.state.upload.uploading ? "hide" : "")}
+                    onClick={this.cancelUpload}>
+              <i className="glyphicon glyphicon-remove-circle"></i>
+              Annuler l'upload
+            </button>
+
+            <button type="button" className="btn btn-default btn-sm" onClick={this.viewMap}>
+              <i className="fa fa-globe"></i> Voir la carte
+            </button>
           </div>
+
+          
+          
+
         </div>
         <i className="drag-drop-icon fa fa-inbox"></i>
         <div className="row">
           {this.state.upload.uploading ? <UploadProgressBar {...this.state.upload}/> : ""}
-          {this.state.upload.resizing ? 
+          {this.state.upload.resizing ?
             <ProgressBar
               current={this.state.upload.resizedImages}
               total={this.state.upload.totalCount}
               template={(info) => `Resized ${info.current} of ${info.total} images. Your browser might slow down during this process.`}
-            /> 
+            />
           : ""}
 
+<<<<<<< HEAD
           {this.state.upload.error !== "" ? 
+=======
+          {this.state.upload.uploading || this.state.upload.resizing ?
+            <i className="fa fa-refresh fa-spin fa-fw" />
+            : ""}
+
+          {this.state.upload.error !== "" ?
+>>>>>>> 4e916d99a3fd9befc8e4ae885511fb8006b26a88
             <div className="alert alert-warning alert-dismissible">
                 <button type="button" className="close" aria-label="Close" onClick={this.closeUploadError}><span aria-hidden="true">&times;</span></button>
                 {this.state.upload.error}
             </div>
             : ""}
 
-          {this.state.upload.editing ? 
+          {this.state.upload.editing ?
             <NewTaskPanel
               onSave={this.handleTaskSaved}
               onCancel={this.handleTaskCanceled}
@@ -452,6 +492,7 @@ class ProjectListItem extends React.Component {
             />
           : ""}
 
+<<<<<<< HEAD
           {this.state.importing ? 
             <ImportTaskPanel
               onImported={this.newTaskAdded}
@@ -463,6 +504,11 @@ class ProjectListItem extends React.Component {
           {this.state.showTaskList ? 
             <TaskList 
                 ref={this.setRef("taskList")} 
+=======
+          {this.state.showTaskList ?
+            <TaskList
+                ref={this.setRef("taskList")}
+>>>>>>> 4e916d99a3fd9befc8e4ae885511fb8006b26a88
                 source={`/api/projects/${data.id}/tasks/?ordering=-created_at`}
                 onDelete={this.taskDeleted}
                 history={this.props.history}
@@ -470,6 +516,7 @@ class ProjectListItem extends React.Component {
 
         </div>
       </li>
+      </div>
     );
   }
 }

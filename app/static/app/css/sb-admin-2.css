@@ -346,3 +346,17 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+.bgFooter {
+    background:#45aaf2;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    text-align:center;
+}
+.footertext{
+    color: white;
+    font-weight: bold;
+}
+
+

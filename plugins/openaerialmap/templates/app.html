@@ -7,21 +7,21 @@
 
 
 {% if not form.token.value %}
-    <p>OpenAerialMap (OAM) is a set of tools for searching, sharing, and using openly licensed satellite and unmanned aerial vehicle (UAV) imagery.</p>
-    <p>To share your results with OAM:</p>
+    <p>OpenAerialMap (OAM) est un ensemble d'outils permettant de rechercher, de partager et d'utiliser des images UAV (satellite et véhicule aérien sans pilote) sous licence ouverte..</p>
+    <p>Pour partager votre resultat avec OAM:</p>
     <ol>
-        <li>Sign-in from <a href="https://map.openaerialmap.org" target="_blank">map.openaerialmap.org</a>.</li>
+        <li>Connectez-vous via <a href="https://map.openaerialmap.org" target="_blank">map.openaerialmap.org</a>.</li>
         <li>Navigate to your OAM profile page (click your user's avatar) and press the <b>Request 3rd Party API Token</b> button.</li>
-        <li>Copy and paste the token in the form below.</li>
+        <li>Copiez et collez le jeton(token) dans le formulaire ci-dessous.</li>
     </ol>
     {% else %}
         <p><b>You are all set!</b> To share a task, select it from the <a href="/dashboard/">dashboard</a> and press the <b>Share to OAM</b> button.</p>
-        <p>Your submissions can be managed from your OAM profile page.</p>
-        <p><a class="btn btn-sm btn-default" href="https://map.openaerialmap.org" target="_blank"><i class="fa fa-external-link"></i> Go To OpenAerialMap</a></p>
+        <p>Vos envois peuvent être gérés à partir de votre page de profil OAM.</p>
+        <p><a class="btn btn-sm btn-default" href="https://map.openaerialmap.org" target="_blank"><i class="fa fa-external-link"></i> Aller à OpenAerialMap</a></p>
     {% endif %}
 
     <form action="" method="post" class="oam-form oam-token-form">
-        <h4>Token Settings</h4>
+        <h4>Paramètres de jeton(Token)</h4>
         {% csrf_token %}
         {% include "app/plugins/templates/form.html" %}
         <button type="submit" class="btn btn-primary"><i class="fa fa-save fa-fw"></i> Set Token</i></button>

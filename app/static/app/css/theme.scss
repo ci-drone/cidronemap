@@ -11,7 +11,7 @@ ul#side-menu.nav a,
 }
 .theme-border-primary{
     border-color: theme("primary");
-}
+}zzz
 .tooltip{
 	.tooltip-inner{
 		background-color: theme("primary");
@@ -76,19 +76,19 @@ a, a:hover, a:focus{
 /* Button primary */
 #navbar-top .navbar-top-links,{
 	a:hover,a:focus,.open > a{
-		background-color: theme("button_primary");
+		background-color: #45aaf2;
 		color: theme("secondary");
 	}
 }
 
 #navbar-top ul#side-menu a:hover, #navbar-top ul#side-menu a:focus{
 	background-color: theme("button_primary");
-	color: theme("secondary");
+	color:white;
 }
 
 .btn-primary, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary{
-	background-color: theme("button_primary");
-	border-color: theme("button_primary");
+	background-color: #45aaf2;
+	border-color: #45aaf2;
 	color: theme("secondary");
 
 	&:hover, &:active, &:focus, &[disabled]:hover, &[disabled]:focus, &[disabled]:active{
@@ -100,8 +100,8 @@ a, a:hover, a:focus{
 
 /* Button default */
 .btn-default, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default{
-	background-color: theme("button_default");
-	border-color: theme("button_default");
+	background-color: #fd9644;
+	border-color: #fd9644;
 	color: theme("secondary");
 
 	&:hover, &:active, &:focus, &[disabled]:hover, &[disabled]:focus, &[disabled]:active{
@@ -141,7 +141,7 @@ a, a:hover, a:focus{
 
 /* Header background */
 #navbar-top{
-	background-color: theme("header_background");
+	background-color: whitesmoke;
 }
 
 /* Header primary */

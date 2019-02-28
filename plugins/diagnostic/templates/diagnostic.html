@@ -2,28 +2,28 @@
 
 {% block content %}
 <script src="./Chart.min.js"></script>
-<h2>Diagnostic Information</h2>
+<h2>Diagnostique Memoire</h2>
 
-<p><b>App Version:</b> {{ version }}</p>
+<!-- <p><b>App Version:</b> {{ version }}</p> MIS EN COMMENTAIRE PERSONNELEMENT-->
 
 <div class="row text-center">
-    <div class="col-md-4 col-sm-12">
-        <h4>Storage Space</h4>
+    <div class="col-md-5 col-sm-12">
+        <h4>Espace de stockage</h4>
         <div style="width: 80%; margin-left: 10%;">
             <canvas id="diskChart" width="200" height="200" style="margin-bottom: 12px;"></canvas>
         </div>
-        <p><b>Free:</b> {{ free_disk_space|filesizeformat }} |
-            <b>Used:</b> {{ used_disk_space|filesizeformat }} |
+        <p><b>Libre:</b> {{ free_disk_space|filesizeformat }} |
+            <b>Utilise:</b> {{ used_disk_space|filesizeformat }} |
             <b>Total:</b> {{ total_disk_space|filesizeformat }}</p>
     </div>
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-5 col-sm-12">
         {% if total_memory %}
-        <h4>Memory</h4>
+        <h4>Memoire RAM</h4>
         <div style="width: 80%; margin-left: 10%;">
             <canvas id="memoryChart" width="200" height="200" style="margin-bottom: 12px;"></canvas>
         </div>
-        <p><b>Free:</b> {{ free_memory|filesizeformat }} |
-            <b>Used:</b> {{ used_memory|filesizeformat }} |
+        <p><b>Libre:</b> {{ free_memory|filesizeformat }} |
+            <b>Utilise:</b> {{ used_memory|filesizeformat }} |
             <b>Total:</b> {{ total_memory|filesizeformat }}</p>
         {% endif %}
     </div>
@@ -36,15 +36,15 @@
 (function(){
     var ctx = document.getElementById('diskChart').getContext('2d');
     var labels = {
-        'Used': '{{ used_disk_space|filesizeformat }}',
-        'Free': '{{ free_disk_space|filesizeformat }}'
+        'Utilise': '{{ used_disk_space|filesizeformat }}',
+        'Libre': '{{ free_disk_space|filesizeformat }}'
     };
     var chart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ["Used", "Free"],
+            labels: ["Utilse", "Libre"],
             datasets: [{
-                label: "Disk Space",
+                label: "Espace de disque",
                 backgroundColor:[
                     "rgb(255, 99, 132)",
                     "rgb(54, 162, 235)"
@@ -68,15 +68,15 @@
 (function(){
     var ctx = document.getElementById('memoryChart').getContext('2d');
     var labels = {
-        'Used': '{{ used_memory|filesizeformat }}',
-        'Free': '{{ free_memory|filesizeformat }}'
+        'Utilise': '{{ used_memory|filesizeformat }}',
+        'Libre': '{{ free_memory|filesizeformat }}'
     };
     var chart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ["Used", "Free"],
+            labels: ["Utilise", "Libre"],
             datasets: [{
-                label: "Disk Space",
+                label: "Espace de disque",
                 backgroundColor:[
                     "rgb(255, 99, 132)",
                     "rgb(54, 162, 235)"

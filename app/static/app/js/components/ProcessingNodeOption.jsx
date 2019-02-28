@@ -72,15 +72,15 @@ class ProcessingNodeOption extends React.Component {
     if (this.props.type !== 'bool'){
       if (this.isEnumType()){
         // Enum
-        let selectValue = this.state.value !== "" ? 
-                          this.state.value : 
-                          this.props.defaultValue; 
+        let selectValue = this.state.value !== "" ?
+                          this.state.value :
+                          this.props.defaultValue;
         inputControl = (
             <select
               className="form-control"
               value={selectValue}
               onChange={this.handleSelectChange}>
-                {this.props.domain.map(val => 
+                {this.props.domain.map(val =>
                   <option value={val} key={val}>{val}</option>
                 )}
             </select>
@@ -88,7 +88,7 @@ class ProcessingNodeOption extends React.Component {
       }else{
         // String, numbers, etc.
         inputControl = (
-            <input type="text" 
+            <input type="text"
               className="form-control"
               placeholder={this.props.defaultValue}
               value={this.state.value}
@@ -102,7 +102,7 @@ class ProcessingNodeOption extends React.Component {
             <label>
               <input type="checkbox"
                     checked={this.state.value !== ""}
-                    onChange={this.handleCheckboxChange} /> Enable
+                    onChange={this.handleCheckboxChange} /> Activer
             </label>
           </div>
         );
@@ -113,7 +113,7 @@ class ProcessingNodeOption extends React.Component {
         <label>{this.props.name} {(!this.isEnumType() && this.props.domain ? `(${this.props.domain})` : "")}</label><br/>
         {inputControl}
         <button type="submit" className="btn glyphicon glyphicon-info-sign btn-primary" data-toggle="tooltip" data-placement="left" title={this.props.help} onClick={e => e.preventDefault()}></button>
-        <button type="submit" className="btn glyphicon glyphicon glyphicon-repeat btn-default" data-toggle="tooltip" data-placement="top" title="Reset to default" onClick={this.resetToDefault}></button>
+        <button type="submit" className="btn glyphicon glyphicon glyphicon-repeat btn-default" data-toggle="tooltip" data-placement="top" title="Reinitialiser" onClick={this.resetToDefault}></button>
       </div>
     );
   }

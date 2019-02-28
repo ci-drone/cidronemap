@@ -17,9 +17,9 @@ from django import forms
 def index(request):
     # Check first access where the user is expected to
     # create an admin account
-    if User.objects.filter(is_superuser=True).count() == 0:
+    """ if User.objects.filter(is_superuser=True).count() >= 0:
         return redirect('welcome')
-
+ """
     return redirect('dashboard' if request.user.is_authenticated
                     else 'login')
 
@@ -32,7 +32,7 @@ def dashboard(request):
     if Project.objects.count() == 0:
         Project.objects.create(owner=request.user, name=_("First Project"))
 
-    return render(request, 'app/dashboard.html', {'title': 'Dashboard',
+    return render(request, 'app/dashboard.html', {'title': 'Tableau de bord',
         'no_processingnodes': no_processingnodes,
         'no_tasks': no_tasks
     })
@@ -46,7 +46,7 @@ def map(request, project_pk=None, task_pk=None):
         project = get_object_or_404(Project, pk=project_pk)
         if not request.user.has_perm('app.view_project', project):
             raise Http404()
-        
+
         if task_pk is not None:
             task = get_object_or_404(Task.objects.defer('orthophoto_extent', 'dsm_extent', 'dtm_extent'), pk=task_pk, project=project)
             title = task.name
@@ -95,9 +95,9 @@ def processing_node(request, processing_node_id):
     if not pn.update_node_info():
         messages.add_message(request, messages.constants.WARNING, '{} seems to be offline.'.format(pn))
 
-    return render(request, 'app/processing_node.html', 
+    return render(request, 'app/processing_node.html',
             {
-                'title': 'Processing Node', 
+                'title': 'Processing Node',
                 'processing_node': pn,
                 'available_options_json': pn.get_available_options_json(pretty=True)
             })
@@ -112,27 +112,26 @@ class FirstUserForm(forms.ModelForm):
 
 
 def welcome(request):
-    if User.objects.filter(is_superuser=True).count() > 0:
-        return redirect('index')
-
     fuf = FirstUserForm()
+    """ if User.objects.filter(is_superuser=True).count() > 0:
+        return redirect('index') """
 
     if request.method == 'POST':
         fuf = FirstUserForm(request.POST)
         if fuf.is_valid():
             admin_user = fuf.save(commit=False)
             admin_user.password = make_password(fuf.cleaned_data['password'])
-            admin_user.is_superuser = admin_user.is_staff = True
+            """ admin_user.is_superuser = admin_user.is_staff = True """
             admin_user.save()
 
             # Log-in automatically
             login(request, admin_user, 'django.contrib.auth.backends.ModelBackend')
-            return redirect('dashboard')
+            return redirect('dashboard')  
 
     return render(request, 'app/welcome.html',
                   {
                       'title': 'Welcome',
-                      'firstuserform': fuf
+                       'firstuserform': fuf
                   })
 
 

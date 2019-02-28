@@ -1,8 +1,14 @@
 #dashboard-app{
+   
     .row{
         &.no-margin{
-            margin: 0;
+            margin: 0px;
         }
+    }
+
+    .dash{
+        /* display: flex;
+        flex-flow: row wrap; */
     }
 
     .progress{
@@ -15,6 +21,8 @@
     }
 
     .add-button, .list-group{
+        margin-top: 10px;
         margin-bottom: 8px;
+        margin-right: 8px;
     }
 }
