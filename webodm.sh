@@ -218,13 +218,6 @@ start(){
         command+=" -f docker-compose.nodeodm.yml"
     fi
 
-<<<<<<< HEAD
-    if [[ $dev_mode = true ]]; then
-        command+=" -f docker-compose.dev.yml"
-    fi
-	
-=======
->>>>>>> 4e916d99a3fd9befc8e4ae885511fb8006b26a88
 	if [ "$WO_SSL" = "YES" ]; then
 		if [ ! -z "$WO_SSL_KEY" ] && [ ! -e "$WO_SSL_KEY" ]; then
 			echo -e "\033[91mSSL key file does not exist: $WO_SSL_KEY\033[39m"
