@@ -17,9 +17,9 @@ from django import forms
 def index(request):
     # Check first access where the user is expected to
     # create an admin account
-    if User.objects.filter(is_superuser=True).count() >= 0:
+    """ if User.objects.filter(is_superuser=True).count() >= 0:
         return redirect('welcome')
-
+ """
     return redirect('dashboard' if request.user.is_authenticated
                     else 'login')
 
@@ -121,7 +121,7 @@ def welcome(request):
         if fuf.is_valid():
             admin_user = fuf.save(commit=False)
             admin_user.password = make_password(fuf.cleaned_data['password'])
-            admin_user.is_superuser = admin_user.is_staff = True
+            """ admin_user.is_superuser = admin_user.is_staff = True """
             admin_user.save()
 
             # Log-in automatically
