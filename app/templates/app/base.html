@@ -35,17 +35,20 @@
     {% endcompress %}
 
     <style type="text/css">
-    .imgt{
-        -webkit-transition: -webkit-transform .8s ease-in-out;
-        -ms-transition: -ms-transform .8s ease-in-out;
-        transition: transform .8s ease-in-out;
-    }
-    .imgt:hover{
-        transform:rotate(360deg);
-        -ms-transform:rotate(360deg);
-        -webkit-transform:rotate(360deg);
-        }
+
         {{ SETTINGS.theme.css|safe }}
+        .bgFooter {
+            background:#45aaf2;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: auto;
+            text-align:center;
+        }
+        .footertext{
+            color: white;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body data-admin-utc-offset="{% now "Z" %}">

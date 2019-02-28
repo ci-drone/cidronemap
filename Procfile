@@ -1,0 +1,1 @@
+web: node app/static/app/js/main.jsx

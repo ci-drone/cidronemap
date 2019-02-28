@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "python manage.py test app.tests.test_generate_ui_mocks && jest",
-    "qtest": "jest"
+    "qtest": "jest",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "eject": "react-scripts eject"
+
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OpenDroneMap/WebODM.git"
+    "url": "git+https://github.com/ci-done/cidronemap.git"
   },
   "keywords": [
     "opendronemap"
@@ -17,9 +21,9 @@
   "author": "",
   "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/OpenDroneMap/WebODM/issues"
+    "url": "https://github.com/ci-done/cidronemap/issues"
   },
-  "homepage": "https://github.com/OpenDroneMap/WebODM#readme",
+  "homepage": "https://github.com/ci-done/cidronemap#readme",
   "dependencies": {
     "@babel/core": "^7.0.0-beta.54",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.54",
@@ -39,6 +43,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "fbemitter": "^2.1.1",
     "file-loader": "^0.9.0",
+    "gh-pages": "^2.0.1",
     "gl-matrix": "^2.3.2",
     "history": "^4.7.2",
     "immutability-helper": "^2.0.0",

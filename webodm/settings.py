@@ -122,12 +122,12 @@ WSGI_APPLICATION = 'webodm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'webodm_dev',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'drone_cloud',
+        'USER': 'dronecloud',
+        'PASSWORD': 'dronecloud',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 

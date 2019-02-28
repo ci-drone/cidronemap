@@ -4,10 +4,11 @@ import $ from 'jquery';
 
 class Paginator extends React.Component {
     render() {
+      console.log(this.props)
         const { itemsPerPage, totalItems, currentPage } = this.props;
         let paginator = null;
 
-        if (itemsPerPage && itemsPerPage && totalItems > itemsPerPage){
+        if (itemsPerPage && totalItems > itemsPerPage){
             const numPages = Math.ceil(totalItems / itemsPerPage),
                   pages = [...Array(numPages).keys()]; // [0, 1, 2, ...numPages]
 
